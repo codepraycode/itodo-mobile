@@ -1,7 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
-import {assets, FONTS} from './constants';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {useFonts} from 'expo-font';
+
+
+import Header from './components/Header';
+import Todos from './components/Todos';
+import Footer from './components/Footer';
+
+import {COLORS} from './constants';
 
 export default function App() {
 
@@ -16,37 +23,20 @@ export default function App() {
 
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
 
-      <ImageBackground
-          source={assets.heroBg}
-          resize={"cover"}
-          style={{
-            flex:1,
-              // width:'100%',
-              // height:'30%',
-              alignItems:'center',
-              justifyContent:'center',
-              
-          }}
-      >
-        <Text style={{fontFamily:FONTS.regular}}>
-          ToDi App
-          <Text>Open up App.js to start working on your app!</Text>
-        </Text>
-        
-        </ImageBackground>
+      <Header/>
+      <Todos/>
+      <Footer/>
       
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    backgroundColor: COLORS.lightMode.veryLightGray,
   },
 });
