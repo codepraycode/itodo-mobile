@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet,FlatList } from 'react-native'
+import { View, Text, StyleSheet,FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { COLORS, Todos, SHADOWS, FONTS, SIZES} from '../constants';
 import Header from './Header';
@@ -10,14 +10,25 @@ const TodoItem = ({todo})=>{
   if(!todo.task){
     return (
       <View style={styles.taskActions}>
+
         <Text style={styles.fadeText}>5 items left</Text>
 
-        <Text style={styles.deepText}>Clear completed</Text>
+        <TouchableOpacity 
+          onPress={()=>{console.log("Pressed Clear completed")}}
+        >
+          <Text style={styles.deepText}>Clear completed</Text>
+        </TouchableOpacity>
+
+        
       </View>
     )
   }
   return (
-    <View style={styles.taskContainer}>
+    <TouchableOpacity 
+      style={styles.taskContainer} 
+      onPress={()=>{console.log("Pressed", todo.id)}}
+      onLongPress={()=>{console.log("Long Pressed", todo.id)}}
+    >
       <View style={[styles.taskChecker, todo.completed && styles.checkerChecked]}>
         {
           todo.completed && (
@@ -37,7 +48,7 @@ const TodoItem = ({todo})=>{
         
       </View>
       <Text style={[styles.task, todo.completed && styles.checked]}>{todo.task}</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -45,9 +56,26 @@ const TodoItem = ({todo})=>{
 const TaskFilters = ()=>{
   return (
     <View style={styles.taskFilters}>
-      <Text style={[styles.deepText, styles.activeText]}>All</Text>
-      <Text style={[styles.deepText]}>Active</Text>
-      <Text  style={[styles.deepText]}>Completed</Text>
+      <TouchableOpacity 
+        onPress={()=>{console.log("Pressed filter for all")}}
+      >
+        <Text style={[styles.deepText, styles.activeText]}>All</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity 
+        onPress={()=>{console.log("Pressed filter for active")}}
+      >
+        <Text style={[styles.deepText]}>Active</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity 
+        onPress={()=>{console.log("Pressed filter for completed")}}
+      >
+        <Text  style={[styles.deepText]}>Completed</Text>
+      </TouchableOpacity>
+      
+      
+      
     </View>
   )
 }

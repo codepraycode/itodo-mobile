@@ -1,4 +1,4 @@
-import { StyleSheet,View, Text, ImageBackground, } from 'react-native'
+import { StyleSheet,View, Text, ImageBackground, TouchableOpacity, } from 'react-native'
 import React from 'react'
 import { assets, FONTS,COLORS, SIZES } from '../constants';
 import { Icon } from '@rneui/base';
@@ -38,13 +38,20 @@ const Header = () => {
             Todi
           </Text>
 
-          <View style={styles.moon}>
+
+          <TouchableOpacity
+            onPress={()=>{console.log("Pressed theme toggler")}}
+          >
+
             <Icon
               name={"sun"}
               type="feather"
               color={COLORS.lightMode.lightGrayishBlue}
             />
-          </View>
+
+          </TouchableOpacity>
+
+          
         </View>
 
 
