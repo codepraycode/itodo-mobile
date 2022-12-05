@@ -41,6 +41,9 @@ export default Header;
 
 const styles = StyleSheet.create({
   container:{
-    flex:2,
+    // flex:2,
+    height:300,
+    maxHeight:'50%',
+    width:'100%',
   }
 })

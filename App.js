@@ -4,11 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {useFonts} from 'expo-font';
 
 
-import Header from './components/Header';
+// import Header from './components/Header';
 import Todos from './components/Todos';
-import Footer from './components/Footer';
 
 import {COLORS} from './constants';
+import Footer from './components/Footer';
 
 export default function App() {
 
@@ -25,9 +25,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
 
-      <Header/>
+      {/* <Header/> */}
       <Todos/>
-      <Footer/>
+      {/* <Footer/> */}
       
       <StatusBar style="auto" />
     </SafeAreaView>
@@ -38,5 +38,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.lightMode.veryLightGray,
+    // justifyContent:'center',
+    alignItems:'center',
   },
 });

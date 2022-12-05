@@ -51,7 +51,7 @@ export const SHADOWS = {
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
 
-    elevation: 3,
+    elevation: 5,
   },
   medium: {
     shadowColor: COLORS.shadow,
@@ -65,14 +65,14 @@ export const SHADOWS = {
     elevation: 7,
   },
   dark: {
-    shadowColor: COLORS.shadow,
+    shadowColor: COLORS.darkMode.veryDarkGrayishBlueAlt,
     shadowOffset: {
       width: 0,
-      height: 7,
+      height: 1,
     },
-    shadowOpacity: 0.41,
-    shadowRadius: 9.11,
+    shadowOpacity: 0.11,
+    shadowRadius: 1.0,
 
-    elevation: 14,
+    elevation:10,
   },
 };
