@@ -73,19 +73,6 @@ const TodoList = () => {
 export default TodoList;
 
 
-export const TaskInput = ()=>{
-  return (
-    <View>
-
-      <View></View>
-      <Input/>
-
-    </View>
-  )
-}
-
-
-
 const styles = StyleSheet.create({
   container:{
     // flex:3,
@@ -153,7 +140,7 @@ const styles = StyleSheet.create({
     // width:'100%',
     // paddingTop:10,
     marginTop:30,
-    paddingVertical:10,
+    paddingVertical:13,
     backgroundColor:COLORS.lightMode.veryLightGray,
     ...SHADOWS.dark,
   },
