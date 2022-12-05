@@ -7,7 +7,8 @@ import {useFonts} from 'expo-font';
 // import Header from './components/Header';
 import Todos from './components/Todos';
 
-import {COLORS} from './constants';
+import {Todos as TodoData, COLORS} from './constants';
+import { useState } from 'react';
 
 export default function App() {
 
@@ -17,6 +18,11 @@ export default function App() {
     JosefinRegular:require('./assets/fonts/JosefinSans-Regular.ttf'),
   });
 
+  const [todos, updateTodos] = useState(()=>[...TodoData]);
+  const terminator = {
+        id:"xx",
+        task:null,
+    }
 
   if(!loaded) return null;
 
@@ -25,7 +31,15 @@ export default function App() {
     <View style={styles.container}>
 
       {/* <Header/> */}
-      <Todos/>
+      <Todos 
+        todos={[...todos,terminator]} 
+        addNew={(newTask)=>updateTodos((p)=>[ ...p, newTask,  ])}
+        deleteTask={(id)=>updateTodos((p)=>p.filter((t)=>t.id !== id))}
+        updateTask={(task)=>updateTodos(p=>p.map(t=>{
+          if (t.id === task.id) return task;
+          return t
+        }))}
+      />
       {/* <Footer/> */}
       
       <StatusBar style="light" />

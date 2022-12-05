@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet,FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { COLORS, Todos, SHADOWS, FONTS, SIZES} from '../constants';
+import { COLORS, SHADOWS, FONTS, SIZES} from '../constants';
 import Header from './Header';
 import { Icon } from '@rneui/themed';
 
 
 
-const TodoItem = ({todo})=>{
+const TodoItem = ({todo,deleteTask, updateTask})=>{
   if(!todo.task){
     return (
       <View style={styles.taskActions}>
@@ -26,8 +26,8 @@ const TodoItem = ({todo})=>{
   return (
     <TouchableOpacity 
       style={styles.taskContainer} 
-      onPress={()=>{console.log("Pressed", todo.id)}}
-      onLongPress={()=>{console.log("Long Pressed", todo.id)}}
+      onPress={()=>updateTask({...todo, completed:!todo.completed})}
+      onLongPress={()=>deleteTask(todo.id)}
     >
       <View style={[styles.taskChecker, todo.completed && styles.checkerChecked]}>
         {
@@ -80,7 +80,8 @@ const TaskFilters = ()=>{
   )
 }
 
-const TodoList = () => {
+const TodoList = ({todos:Todos, addNew, deleteTask, updateTask}) => {
+
   return (
     <>
       <View style={styles.container}>
@@ -89,11 +90,12 @@ const TodoList = () => {
           contentContainerStyle={styles.content}
           
           data={Todos}
-          renderItem={({item:todo})=><TodoItem todo={todo}/>}
+          renderItem={({item:todo})=><TodoItem todo={todo} deleteTask={deleteTask} updateTask={updateTask}/>}
           keyExtractor={(item)=> item.id}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={<View style={styles.line}></View>}
-          ListHeaderComponent={<Header/>}
+          
+          ListHeaderComponent={<Header addNew={addNew}/>}
           
           ListFooterComponent={()=>(
             <>

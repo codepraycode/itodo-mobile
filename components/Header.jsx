@@ -1,21 +1,48 @@
 import { StyleSheet,View, Text, ImageBackground, TouchableOpacity, } from 'react-native'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { assets, FONTS,COLORS, SIZES } from '../constants';
 import { Icon } from '@rneui/base';
 import { Input } from '@rneui/themed';
 
 
-const TaskInput = ()=>{
+const TaskInput = ({addNewTask})=>{
+
+  const [newTask, setNewTask ] = useState('');
+  // const inputRef = useRef();
+
   return (
     <View style={styles.taskContainer}>
 
       <View  style={styles.taskChecker}></View>
       <Input 
-        // containerStyle={{backgroundColor:'red',}} 
+        
         inputContainerStyle={{borderBottomWidth:0,}}
         inputStyle={styles.inputStyle}
-        // errorMessage={null}
+        cursorColor={COLORS.darkMode.veryDarkDesaturatedBlue}
         errorStyle={{display:"none"}}
+        autoCapitalize={true}
+        autoComplete={"off"}
+        blurOnSubmit={true}
+        autoFocus={true}
+
+
+        value={newTask}
+        onChangeText={(v)=>setNewTask(()=>v)}
+        // ref={inputRef}
+        onEndEditing={()=>{
+          if(!Boolean(newTask)) return
+
+
+          return addNewTask({
+            id: new Date().getTime(),
+            task:newTask,
+            completed:false,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            platform:'mobile'
+
+          });
+        }}
       />
 
     </View>
@@ -23,7 +50,7 @@ const TaskInput = ()=>{
 }
 
 
-const Header = () => {
+const Header = ({addNew:addNewTask}) => {
     
     return (
       <ImageBackground
@@ -55,7 +82,7 @@ const Header = () => {
         </View>
 
 
-        <TaskInput/>
+        <TaskInput addNewTask={addNewTask}/>
         
       </ImageBackground>
     )
