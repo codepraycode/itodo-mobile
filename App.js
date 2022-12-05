@@ -49,6 +49,7 @@ export default function App() {
 
         filter={filter}
         changeFilter={(value)=> setFilter(()=> (Boolean(value) && ['active', 'completed' ].includes(value)) ? value : 'all')} // if nothing is given, default to all
+        clearCompleted={()=>updateTodos(p=>p.filter(t=>!t.completed))}
       />
       {/* <Footer/> */}
       

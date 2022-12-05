@@ -6,15 +6,15 @@ import { Icon } from '@rneui/themed';
 
 
 
-const TodoItem = ({todo,deleteTask, updateTask})=>{
+const TodoItem = ({todo, total, deleteTask, updateTask,clearCompleted})=>{
   if(!todo.task){
     return (
       <View style={styles.taskActions}>
 
-        <Text style={styles.fadeText}>5 items left</Text>
+        <Text style={styles.fadeText}>{total > 0 ? `${total} task${total > 1 ? 's':'' } left` : "No task"}</Text>
 
         <TouchableOpacity 
-          onPress={()=>{console.log("Pressed Clear completed")}}
+          onPress={()=>clearCompleted()}
         >
           <Text style={styles.deepText}>Clear completed</Text>
         </TouchableOpacity>
@@ -80,7 +80,7 @@ const TaskFilters = ({filter, changeFilter})=>{
   )
 }
 
-const TodoList = ({todos:Todos, addNew, deleteTask, updateTask, filter, changeFilter}) => {
+const TodoList = ({todos:Todos, addNew, deleteTask, updateTask, filter, changeFilter, clearCompleted}) => {
 
   return (
     <>
@@ -90,7 +90,7 @@ const TodoList = ({todos:Todos, addNew, deleteTask, updateTask, filter, changeFi
           contentContainerStyle={styles.content}
           
           data={Todos}
-          renderItem={({item:todo})=><TodoItem todo={todo} deleteTask={deleteTask} updateTask={updateTask}/>}
+          renderItem={({item:todo})=><TodoItem todo={todo} total={Todos.length-1} deleteTask={deleteTask} updateTask={updateTask} clearCompleted={clearCompleted}/>}
           keyExtractor={(item)=> item.id}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={<View style={styles.line}></View>}
