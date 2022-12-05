@@ -5,9 +5,31 @@ import { Icon } from '@rneui/base';
 import { Input } from '@rneui/themed';
 
 
-const TaskInput = ({addNewTask})=>{
+const TaskInput = ({addNewTask, alreadyExist})=>{
 
   const [newTask, setNewTask ] = useState('');
+  const [error, setError] = useState(null);
+
+
+  const handleCreateTaskItem = () =>{
+
+    if(!Boolean(newTask)) return;
+
+    if(alreadyExist(newTask)) return setError("Task already exist");
+
+    addNewTask({
+      id: new Date().getTime(),
+      task:newTask,
+      completed:false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      platform:'mobile'
+
+    });
+
+    setNewTask('');
+    
+  }
 
   return (
     <View style={styles.taskContainer}>
@@ -18,7 +40,9 @@ const TaskInput = ({addNewTask})=>{
         inputContainerStyle={{borderBottomWidth:0,}}
         inputStyle={styles.inputStyle}
         cursorColor={COLORS.darkMode.veryDarkDesaturatedBlue}
-        errorStyle={{display:"none"}}
+
+        errorMessage={error}
+        errorStyle={!error && {display:"none"}}
         autoCapitalize={true}
         autoComplete={"off"}
         blurOnSubmit={true}
@@ -26,22 +50,9 @@ const TaskInput = ({addNewTask})=>{
 
 
         value={newTask}
-        onChangeText={(v)=>setNewTask(()=>v)}
+        onChangeText={(v)=>{setNewTask(()=>v); setError(null)}}
         // ref={inputRef}
-        onEndEditing={()=>{
-          if(!Boolean(newTask)) return
-
-
-          return addNewTask({
-            id: new Date().getTime(),
-            task:newTask,
-            completed:false,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            platform:'mobile'
-
-          });
-        }}
+        onEndEditing={handleCreateTaskItem}
       />
 
     </View>
@@ -49,7 +60,7 @@ const TaskInput = ({addNewTask})=>{
 }
 
 
-const Header = ({addNew:addNewTask}) => {
+const Header = ({addNew:addNewTask, alreadyExist}) => {
     
     return (
       <ImageBackground
@@ -81,7 +92,7 @@ const Header = ({addNew:addNewTask}) => {
         </View>
 
 
-        <TaskInput addNewTask={addNewTask}/>
+        <TaskInput addNewTask={addNewTask} alreadyExist={alreadyExist}/>
         
       </ImageBackground>
     )

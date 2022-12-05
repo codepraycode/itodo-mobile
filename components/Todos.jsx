@@ -80,7 +80,7 @@ const TaskFilters = ({filter, changeFilter})=>{
   )
 }
 
-const TodoList = ({todos:Todos, addNew, deleteTask, updateTask, filter, changeFilter, clearCompleted}) => {
+const TodoList = ({todos:Todos, addNew,alreadyExist, deleteTask, updateTask, filter, changeFilter, clearCompleted}) => {
 
   return (
     <>
@@ -95,7 +95,7 @@ const TodoList = ({todos:Todos, addNew, deleteTask, updateTask, filter, changeFi
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={<View style={styles.line}></View>}
           
-          ListHeaderComponent={<Header addNew={addNew}/>}
+          ListHeaderComponent={<Header addNew={addNew} alreadyExist={alreadyExist}/>}
           
           ListFooterComponent={()=>(
             <>

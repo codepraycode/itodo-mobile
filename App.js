@@ -83,6 +83,8 @@ export default function App() {
 
         }}
 
+        alreadyExist={(task)=> todos.find( t=>t.task.toLowerCase() === task.toLowerCase() )}
+
         deleteTask={(id)=>{
           let updatedTodos = todos.filter((t)=>t.id !== id);
           // updateTodos((p)=>updatedTodos)
