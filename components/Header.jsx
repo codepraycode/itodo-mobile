@@ -1,5 +1,5 @@
 import { StyleSheet,View, Text, ImageBackground, TouchableOpacity, } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { assets, FONTS,COLORS, SIZES } from '../constants';
 import { Icon } from '@rneui/base';
 import { Input } from '@rneui/themed';
@@ -8,7 +8,6 @@ import { Input } from '@rneui/themed';
 const TaskInput = ({addNewTask})=>{
 
   const [newTask, setNewTask ] = useState('');
-  // const inputRef = useRef();
 
   return (
     <View style={styles.taskContainer}>
