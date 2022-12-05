@@ -13,7 +13,7 @@ const TaskInput = ()=>{
       <Input 
         // containerStyle={{backgroundColor:'red',}} 
         inputContainerStyle={{borderBottomWidth:0,}}
-        // inputStyle={{borderBottomWidth:0,}}
+        inputStyle={styles.inputStyle}
         // errorMessage={null}
         errorStyle={{display:"none"}}
       />
@@ -61,7 +61,7 @@ export default Header;
 const styles = StyleSheet.create({
   container:{
     // flex:2,
-    height:300,
+    height:280,
     maxHeight:'50%',
     width:'100%',
 
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
 
     paddingVertical:20,
     paddingHorizontal:25,
-    marginTop:40,
+    marginTop:20,
     
     
     width:"100%",
@@ -89,6 +89,12 @@ const styles = StyleSheet.create({
     fontFamily:FONTS.bold,
     color:COLORS.lightMode.veryLightGray,
   },
+
+  inputStyle:{
+          borderBottomWidth:0, 
+          fontFamily:FONTS.regular, 
+          color:COLORS.darkMode.veryDarkDesaturatedBlue
+        },
 
 
   taskContainer:{

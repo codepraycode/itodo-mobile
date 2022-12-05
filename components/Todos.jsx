@@ -1,26 +1,24 @@
-import { View, Text, StyleSheet,FlatList, ScrollView } from 'react-native'
+import { View, Text, StyleSheet,FlatList } from 'react-native'
 import React from 'react'
-import { Input } from '@rneui/base';
-import { COLORS, Todos, SHADOWS} from '../constants';
-import Footer from './Footer';
+import { COLORS, Todos, SHADOWS, FONTS, SIZES} from '../constants';
 import Header from './Header';
 
 
 
 const TodoItem = ({todo})=>{
-  if(!todo){
+  if(!todo.task){
     return (
       <View style={styles.taskActions}>
-        <Text>5 items left</Text>
+        <Text style={styles.fadeText}>5 items left</Text>
 
-        <Text>Clear completed</Text>
+        <Text style={styles.deepText}>Clear completed</Text>
       </View>
     )
   }
   return (
     <View style={styles.taskContainer}>
       <View style={styles.taskChecker}></View>
-      <Text style={styles.task}>{todo.task}</Text>
+      <Text style={[styles.task, todo.completed && styles.checked]}>{todo.task}</Text>
     </View>
   )
 }
@@ -29,9 +27,9 @@ const TodoItem = ({todo})=>{
 const TaskFilters = ()=>{
   return (
     <View style={styles.taskFilters}>
-      <Text>All</Text>
-      <Text>Active</Text>
-      <Text>Completed</Text>
+      <Text style={[styles.deepText, styles.activeText]}>All</Text>
+      <Text style={[styles.deepText]}>Active</Text>
+      <Text  style={[styles.deepText]}>Completed</Text>
     </View>
   )
 }
@@ -57,7 +55,7 @@ const TodoList = () => {
 
 
               <View style={styles.footer}>
-                <Text>Drag and drop to reorder list</Text>
+                <Text style={styles.fadeText}>Drag and drop to reorder list</Text>
               </View>
             </>
           )}
@@ -75,19 +73,12 @@ export default TodoList;
 
 const styles = StyleSheet.create({
   container:{
-    // flex:3,
-    alignItems:'center',
-    
+    alignItems:'center',    
     width: '100%',
-    
-    // ...SHADOWS.dark,
-    
   },
 
   content:{
     maxWidth:'99%',
-    // position:'relative',
-    
     width:500,
     backgroundColor:COLORS.lightMode.veryLightGray,
     borderRadius:10,
@@ -100,7 +91,6 @@ const styles = StyleSheet.create({
   
   taskContainer:{
     paddingVertical:20,
-    // paddingHorizontal:10,
     paddingLeft:10,
     paddingRight:3,
     backgroundColor:'transparent',
@@ -119,27 +109,31 @@ const styles = StyleSheet.create({
 
     marginRight:10,
   },
-
   task:{
-    
+    fontFamily:FONTS.regular, 
+    fontSize:SIZES.font,
   },
-
+  checked:{
+    color:COLORS.darkMode.darkGrayishBlue,
+    textDecorationLine:'line-through',
+  },
   taskActions:{
     borderTopWidth:1,
     borderTopColor:COLORS.lightMode.veryLightGrayishBlue,
     padding:15,
     flexDirection:'row',
     alignItems:'center',
-    // justifyContent:'space-around',
+    justifyContent:'space-between',
+
+
+
   },
 
   taskFilters: {
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-evenly',
-    // width:'100%',
-    // paddingTop:10,
-    marginTop:30,
+    marginTop:15,
     paddingVertical:13,
     backgroundColor:COLORS.lightMode.veryLightGray,
     ...SHADOWS.dark,
@@ -152,5 +146,22 @@ const styles = StyleSheet.create({
     alignItems:'center',
 
     marginVertical:20,
+  },
+
+
+
+  fadeText:{
+    fontFamily:FONTS.regular, 
+    fontSize:SIZES.font,
+    color:COLORS.lightMode.darkGrayishBlue,
+  },
+  deepText:{
+    fontFamily:FONTS.bold, 
+    fontSize:SIZES.font,
+    color:COLORS.darkMode.darkGrayishBlue,
+  },
+  activeText:{
+    
+    color:COLORS.activeLink,
   }
 })

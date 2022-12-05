@@ -8,7 +8,6 @@ import {useFonts} from 'expo-font';
 import Todos from './components/Todos';
 
 import {COLORS} from './constants';
-import Footer from './components/Footer';
 
 export default function App() {
 
