@@ -19,6 +19,7 @@ export default function App() {
   });
 
   const [todos, updateTodos] = useState(()=>[...TodoData]);
+  const [filter, setFilter] = useState('all'); // active, completed
   const terminator = {
         id:"xx",
         task:null,
@@ -27,18 +28,27 @@ export default function App() {
   if(!loaded) return null;
 
 
+  let filtered = todos;
+
+  if(filter === 'active') filtered = filtered.filter(t=>!t.completed);
+  else if(filter === 'completed') filtered = filtered.filter(t=>t.completed);
+
   return (
     <View style={styles.container}>
 
       {/* <Header/> */}
       <Todos 
-        todos={[...todos,terminator]} 
+        todos={[...filtered,terminator]}
+
         addNew={(newTask)=>updateTodos((p)=>[ ...p, newTask,  ])}
         deleteTask={(id)=>updateTodos((p)=>p.filter((t)=>t.id !== id))}
         updateTask={(task)=>updateTodos(p=>p.map(t=>{
           if (t.id === task.id) return task;
           return t
         }))}
+
+        filter={filter}
+        changeFilter={(value)=> setFilter(()=> (Boolean(value) && ['active', 'completed' ].includes(value)) ? value : 'all')} // if nothing is given, default to all
       />
       {/* <Footer/> */}
       

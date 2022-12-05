@@ -53,25 +53,25 @@ const TodoItem = ({todo,deleteTask, updateTask})=>{
 }
 
 
-const TaskFilters = ()=>{
+const TaskFilters = ({filter, changeFilter})=>{
   return (
     <View style={styles.taskFilters}>
       <TouchableOpacity 
-        onPress={()=>{console.log("Pressed filter for all")}}
+        onPress={()=>changeFilter()} // same as all
       >
-        <Text style={[styles.deepText, styles.activeText]}>All</Text>
+        <Text style={[styles.deepText, filter === 'all' && styles.activeText]}>All</Text>
       </TouchableOpacity>
 
       <TouchableOpacity 
-        onPress={()=>{console.log("Pressed filter for active")}}
+        onPress={()=>changeFilter('active')}
       >
-        <Text style={[styles.deepText]}>Active</Text>
+        <Text style={[styles.deepText, filter === 'active' && styles.activeText]}>Active</Text>
       </TouchableOpacity>
 
       <TouchableOpacity 
-        onPress={()=>{console.log("Pressed filter for completed")}}
+        onPress={()=>changeFilter('completed')}
       >
-        <Text  style={[styles.deepText]}>Completed</Text>
+        <Text  style={[styles.deepText, filter === 'completed' && styles.activeText]}>Completed</Text>
       </TouchableOpacity>
       
       
@@ -80,7 +80,7 @@ const TaskFilters = ()=>{
   )
 }
 
-const TodoList = ({todos:Todos, addNew, deleteTask, updateTask}) => {
+const TodoList = ({todos:Todos, addNew, deleteTask, updateTask, filter, changeFilter}) => {
 
   return (
     <>
@@ -99,7 +99,7 @@ const TodoList = ({todos:Todos, addNew, deleteTask, updateTask}) => {
           
           ListFooterComponent={()=>(
             <>
-              <TaskFilters/>
+              <TaskFilters filter={filter} changeFilter={changeFilter}/>
 
 
               <View style={styles.footer}>
