@@ -2,6 +2,7 @@ import { View, Text, StyleSheet,FlatList } from 'react-native'
 import React from 'react'
 import { COLORS, Todos, SHADOWS, FONTS, SIZES} from '../constants';
 import Header from './Header';
+import { Icon } from '@rneui/themed';
 
 
 
@@ -17,7 +18,24 @@ const TodoItem = ({todo})=>{
   }
   return (
     <View style={styles.taskContainer}>
-      <View style={styles.taskChecker}></View>
+      <View style={[styles.taskChecker, todo.completed && styles.checkerChecked]}>
+        {
+          todo.completed && (
+            <Icon
+              name={"ios-checkmark-done-circle-outline"}
+              type="ionicon"
+              color={COLORS.lightMode.veryLightGray}
+              style={{
+                position:'relative',
+                top:-4,
+                left:-2,
+              }}
+
+            />
+          )
+        }
+        
+      </View>
       <Text style={[styles.task, todo.completed && styles.checked]}>{todo.task}</Text>
     </View>
   )
@@ -104,14 +122,19 @@ const styles = StyleSheet.create({
     width:20,
     height:20,
     borderColor:COLORS.lightMode.veryLightGrayishBlue,
+    backgroundColor:'transparent',
     borderWidth:1,
     borderRadius:10,
-
     marginRight:10,
+
   },
   task:{
     fontFamily:FONTS.regular, 
     fontSize:SIZES.font,
+  },
+  checkerChecked:{
+    borderColor:COLORS.checkerBgcolor,
+    backgroundColor:COLORS.darkMode.veryDarkDesaturatedBlue,
   },
   checked:{
     color:COLORS.darkMode.darkGrayishBlue,
@@ -119,7 +142,7 @@ const styles = StyleSheet.create({
   },
   taskActions:{
     borderTopWidth:1,
-    borderTopColor:COLORS.lightMode.veryLightGrayishBlue,
+    borderTopColor:COLORS.lightMode.veryLightGray,
     padding:15,
     flexDirection:'row',
     alignItems:'center',

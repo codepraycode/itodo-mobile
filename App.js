@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
+import { StyleSheet,View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {useFonts} from 'expo-font';
 
@@ -22,24 +22,21 @@ export default function App() {
 
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
 
       {/* <Header/> */}
       <Todos/>
       {/* <Footer/> */}
       
-      <StatusBar style="auto" />
-    </SafeAreaView>
+      <StatusBar style="light" />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width:"100%",
     padding:0,
     backgroundColor: COLORS.lightMode.veryLightGray,
-    // justifyContent:'center',
-    alignItems:'center',
   },
 });
