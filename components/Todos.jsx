@@ -16,7 +16,7 @@ const TodoItem = ({todo, total, deleteTask, updateTask,clearCompleted})=>{
         <TouchableOpacity 
           onPress={()=>clearCompleted()}
         >
-          <Text style={styles.deepText}>Clear completed</Text>
+          <Text style={total > 0 ? styles.deepText : styles.fadeText}>Clear completed</Text>
         </TouchableOpacity>
 
         
