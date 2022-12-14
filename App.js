@@ -30,8 +30,6 @@ export default function App() {
   const writeItemToStorage = (updatedTodos) => {
     updateTodos(()=>updatedTodos);
     setItem(JSON.stringify(updatedTodos));
-    
-    
   };
 
   const readItemsFromStorage = async () => {
