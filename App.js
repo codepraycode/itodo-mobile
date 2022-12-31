@@ -1,5 +1,7 @@
+
+import { useEffect, useState } from 'react';
+import { StyleSheet,View} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet,View } from 'react-native';
 // import { SafeAreaView } from 'react-native-safe-area-context';
 import {useFonts} from 'expo-font';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
@@ -8,7 +10,10 @@ import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import Todos from './components/Todos';
 
 import {Todos as DummyTodos, COLORS,TODOS_STORAGE_KEY} from './constants';
-import { useEffect, useState } from 'react';
+
+
+import { USER_TOKEN } from './service/socket';
+
 
 export default function App() {
 
@@ -50,7 +55,11 @@ export default function App() {
 
   useEffect(()=>{
     readItemsFromStorage();
-  }, []);
+  }, []);  
+
+  // useEffect(()=>{
+  //   InitializeSocket();
+  // })
 
 
   const terminator = {

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "itodo",
-    "slug": "itodo",
+    "name": "Todi",
+    "slug": "todi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icons/icon.png",
